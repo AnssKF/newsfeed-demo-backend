@@ -1,8 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework import fields
 from rest_framework.validators import UniqueValidator
 
 #---
+class UserSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    email = serializers.EmailField()
+    username = serializers.CharField(max_length=100)
+
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username']
+
 
 class SignupSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(

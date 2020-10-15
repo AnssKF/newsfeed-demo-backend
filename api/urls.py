@@ -5,6 +5,7 @@ from django.conf import settings
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from userauth.urls import router as userAuthRouter
+from timeline.urls import router as timelineRouter
 
 
 if settings.DEBUG:
@@ -13,6 +14,7 @@ else:
     router = routers.SimpleRouter()
 
 router.registry.extend(userAuthRouter.registry)
+router.registry.extend(timelineRouter.registry)
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
