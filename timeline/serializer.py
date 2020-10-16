@@ -17,7 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
         try:
             like_obj = obj.likes.get(author=request.user.id)
             if like_obj:
-                return True
+                return like_obj.id
         except:
             return False
         return False

@@ -5,6 +5,7 @@ from rest_framework import status
 
 from .models import *
 from .serializer import *
+from .filters import *
 
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all().order_by('-created_at')
@@ -26,6 +27,7 @@ class PostViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    filterset_class = CommentFilter
     http_method_names = ['get', 'post']
     permission_classes = [IsAuthenticated]
 
@@ -43,7 +45,7 @@ class CommentViewSet(ModelViewSet):
 class LikeViewSet(ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
-    http_method_names = ['post']
+    http_method_names = ['post', 'delete']
     permission_classes = [IsAuthenticated]
 
     def create(self, request):
